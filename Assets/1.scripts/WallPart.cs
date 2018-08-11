@@ -29,7 +29,6 @@ public class WallPart : MonoBehaviour
     public Vector2 GetNewPosition()
     {
         Vector2 newPosition = new Vector2(0, 0);
-        Debug.Log(transform.position.x);
         if ((box1 == null && box2 != null) || (box1 != null && box2 == null))
         {
             Box box = (box1 == null) ? box2 : box1;
@@ -40,13 +39,11 @@ public class WallPart : MonoBehaviour
                 // if new position on the far left of the grid
                 if (transform.position.x > box.transform.position.x)
                 {
-                    Debug.Log("left");
                     newPosition = new Vector2(box.transform.position.x - box.size / 2, box.transform.position.y);
                 }
                 // if new position on the far right of the grid
                 else
                 {
-                    Debug.Log("right");
                     newPosition = new Vector2(box.transform.position.x + box.size / 2, box.transform.position.y);
                 }
             }
@@ -57,13 +54,11 @@ public class WallPart : MonoBehaviour
                 // if new position on the bottom of the plane the grid
                 if (transform.position.y > box.transform.position.y)
                 {
-                    Debug.Log("bottom");
                     newPosition = new Vector2(box.transform.position.x, box.transform.position.y - box.size / 2);
                 }
                 // if new position on the top of the plane the grid
                 else
                 {
-                    Debug.Log("top");
                     newPosition = new Vector2(box.transform.position.x, box.transform.position.y + box.size / 2);
                 }
             }
@@ -76,4 +71,12 @@ public class WallPart : MonoBehaviour
         return newPosition;
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0, 0, 1, 1F);
+        if (box1 != null)
+            Gizmos.DrawSphere(box1.transform.position, 0.5f);
+        if (box2 != null)
+            Gizmos.DrawSphere(box2.transform.position, 0.5f);
+    }
 }
