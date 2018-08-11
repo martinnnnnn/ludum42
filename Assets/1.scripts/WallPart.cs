@@ -38,7 +38,7 @@ public class WallPart : MonoBehaviour
             if (direction.x != 0)
             {
                 // if new position on the far left of the grid
-                if (transform.position.x < box.transform.position.x)
+                if (transform.position.x > box.transform.position.x)
                 {
                     Debug.Log("left");
                     newPosition = new Vector2(box.transform.position.x - box.size / 2, box.transform.position.y);
@@ -55,7 +55,7 @@ public class WallPart : MonoBehaviour
             else if (direction.y != 0)
             {
                 // if new position on the bottom of the plane the grid
-                if (transform.position.y < box.transform.position.y)
+                if (transform.position.y > box.transform.position.y)
                 {
                     Debug.Log("bottom");
                     newPosition = new Vector2(box.transform.position.x, box.transform.position.y - box.size / 2);

@@ -99,6 +99,7 @@ public class Grid : MonoBehaviour
             currentWallPart.direction = new Vector2Int(1, 0);
             currentWallPart.box1 = boxes[0][i];
             currentWallPart.box2 = null;
+            currentWallPart.transform.position = boxes[sizeInt.x/2][sizeInt.y/2].transform.position;
             LeftWall.Add(currentWallPart);
             currentWallPart.UpdateRealPositionSnap();
 
