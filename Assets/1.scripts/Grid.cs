@@ -138,8 +138,8 @@ public class Grid : MonoBehaviour
             moveTo = FindInEditorParameters(EditorRightWallList, i);
             if (moveTo != -1)
             {
-                currentWallPart.box1 = boxes[boxes.Length - 1 - moveTo][i];
                 currentWallPart.box2 = boxes[boxes.Length - moveTo][i];
+                currentWallPart.box1 = boxes[boxes.Length - moveTo - 1][i];
             }
             else
             {
@@ -157,18 +157,49 @@ public class Grid : MonoBehaviour
             WallPart currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
             currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
             currentWallPart.direction = new Vector2Int(0, 1);
-            currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
-            currentWallPart.box2 = null;
-            BottomWall.Add(currentWallPart);
+
+            int moveTo = FindInEditorParameters(EditorTopWallList, i);
+            if (moveTo != -1)
+            {
+                currentWallPart.box2 = boxes[i][boxes[i].Length - moveTo];
+                currentWallPart.box1 = boxes[i][boxes[i].Length - moveTo - 1];
+
+                //currentWallPart.box2 = boxes[boxes.Length - moveTo][i];
+                //currentWallPart.box1 = boxes[boxes.Length - moveTo - 1][i];
+            }
+            else
+            {
+                currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
+                currentWallPart.box2 = null;
+            }
+
+
+            //currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
+            //currentWallPart.box2 = null;
+            TopWall.Add(currentWallPart);
             currentWallPart.UpdateRealPositionSnap();
 
-            // adding wall parts to topwall
+            // adding wall parts to bottomwall
             currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
             currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
             currentWallPart.direction = new Vector2Int(0, -1);
-            currentWallPart.box1 = boxes[i][0];
-            currentWallPart.box2 = null;
-            TopWall.Add(currentWallPart);
+
+            moveTo = FindInEditorParameters(EditorBottomWallList, i);
+            if (moveTo != -1)
+            {
+                currentWallPart.box1 = boxes[i][moveTo];
+                currentWallPart.box2 = boxes[i][moveTo - 1];
+            }
+            else
+            {
+                currentWallPart.box1 = boxes[i][0];
+                currentWallPart.box2 = null;
+            }
+
+
+            //currentWallPart.box1 = boxes[i][0];
+            //currentWallPart.box2 = null;
+            BottomWall.Add(currentWallPart);
             currentWallPart.UpdateRealPositionSnap();
         }
     }
@@ -211,10 +242,4 @@ public class Grid : MonoBehaviour
             }
         }
     }
-
-    //void AddWallPartsHorizontal(Wall _wall, Vector2Int _direction, )
-    //{
-
-    //}
-
 }
