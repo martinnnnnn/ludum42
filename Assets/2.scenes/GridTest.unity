@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxPrefab: {fileID: 1035804277}
   wallPartPrefab: {fileID: 381566546}
-  size: {x: 5, y: 5}
+  size: {x: 40, y: 20}
   base0: 1
   EditorLeftWall: []
   EditorRightWall: []

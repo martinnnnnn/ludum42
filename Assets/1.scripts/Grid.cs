@@ -130,70 +130,66 @@ public class Grid : MonoBehaviour
             LeftWall.Add(currentWallPart);
             currentWallPart.UpdateRealPositionSnap();
 
-            //// adding wall parts to rightwall
-            //currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
-            //currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
+            // adding wall parts to rightwall
+            currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
 
-            //moveTo = FindInEditorParameters(EditorRightWallList, i);
-            //if (moveTo != -1)
-            //{
-            //    currentWallPart.box2 = boxes[boxes.Length - moveTo][i];
-            //    currentWallPart.box1 = boxes[boxes.Length - moveTo - 1][i];
-            //}
-            //else
-            //{
-            //    currentWallPart.box1 = boxes[boxes.Length - 1][i];
-            //    currentWallPart.box2 = null;
-            //}
+            moveTo = FindInEditorParameters(EditorRightWallList, i);
+            if (moveTo != -1)
+            {
+                currentWallPart.box2 = boxes[boxes.Length - moveTo][i];
+                currentWallPart.box1 = boxes[boxes.Length - moveTo - 1][i];
+            }
+            else
+            {
+                currentWallPart.box1 = boxes[boxes.Length - 1][i];
+                currentWallPart.box2 = null;
+            }
 
-            //RightWall.Add(currentWallPart);
-            //currentWallPart.UpdateRealPositionSnap();
+            RightWall.Add(currentWallPart);
+            currentWallPart.UpdateRealPositionSnap();
         }
 
-        //for (int i = 0; i < roundSize.x; ++i)
-        //{
-        //    // adding wall parts to bottomwall
-        //    WallPart currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
-        //    currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
-        //    //currentWallPart.direction = new Vector2Int(0, 1);
+        for (int i = 0; i < roundSize.x; ++i)
+        {
+            // adding wall parts to bottomwall
+            WallPart currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
 
-        //    int moveTo = FindInEditorParameters(EditorTopWallList, i);
-        //    if (moveTo != -1)
-        //    {
-        //        currentWallPart.box2 = boxes[i][boxes[i].Length - moveTo];
-        //        currentWallPart.box1 = boxes[i][boxes[i].Length - moveTo - 1];
-        //    }
-        //    else
-        //    {
-        //        currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
-        //        currentWallPart.box2 = null;
-        //    }
+            int moveTo = FindInEditorParameters(EditorTopWallList, i);
+            if (moveTo != -1)
+            {
+                currentWallPart.box2 = boxes[i][boxes[i].Length - moveTo];
+                currentWallPart.box1 = boxes[i][boxes[i].Length - moveTo - 1];
+            }
+            else
+            {
+                currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
+                currentWallPart.box2 = null;
+            }
 
-        //    TopWall.Add(currentWallPart);
-        //    currentWallPart.UpdateRealPositionSnap();
+            TopWall.Add(currentWallPart);
+            currentWallPart.UpdateRealPositionSnap();
 
-        //    // adding wall parts to bottomwall
-        //    currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
-        //    currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
+            // adding wall parts to bottomwall
+            currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
 
-        //    moveTo = FindInEditorParameters(EditorBottomWallList, i);
-        //    if (moveTo != -1)
-        //    {
-        //        currentWallPart.box1 = boxes[i][moveTo];
-        //        currentWallPart.box2 = boxes[i][moveTo - 1];
-        //    }
-        //    else
-        //    {
-        //        currentWallPart.box1 = boxes[i][0];
-        //        currentWallPart.box2 = null;
-        //    }
+            moveTo = FindInEditorParameters(EditorBottomWallList, i);
+            if (moveTo != -1)
+            {
+                currentWallPart.box1 = boxes[i][moveTo];
+                currentWallPart.box2 = boxes[i][moveTo - 1];
+            }
+            else
+            {
+                currentWallPart.box1 = boxes[i][0];
+                currentWallPart.box2 = null;
+            }
 
-
-        //    //currentWallPart.box1 = boxes[i][0];
-        //    //currentWallPart.box2 = null;
-        //    BottomWall.Add(currentWallPart);
-        //    currentWallPart.UpdateRealPositionSnap();
-        //}
+            BottomWall.Add(currentWallPart);
+            currentWallPart.UpdateRealPositionSnap();
+        }
     }
 
     int FindInEditorParameters(List<Vector2> _wallParams, int _index)

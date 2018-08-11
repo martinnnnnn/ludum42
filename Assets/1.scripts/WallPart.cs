@@ -75,28 +75,54 @@ public class WallPart : MonoBehaviour
     {
         Vector2Int size = wall.grid.roundSize;
 
-
-        if ((box1 == null)
-            || (_direction.x != 0 && (box1._position.x + _direction.x > size.x || box1._position.x + _direction.x < 0))
-            || (_direction.y != 0 && (box1._position.y + _direction.y > size.y || box1._position.y + _direction.y < 0)))
-        {            
+        // if box1 == null => leaving a border
+        //      box1 = box2
+        //      box2 normal computation
+        if (box1 == null)
+        {
             box1 = box2;
             box2 = wall.grid.boxes
             [box2._position.x + _direction.x]
             [box2._position.y + _direction.y];
         }
-        else if ((box2 == null)
-            || (_direction.x != 0 && (box2._position.x + _direction.x > size.x || box2._position.x + _direction.x < 0))
-            || (_direction.y != 0 && (box2._position.y + _direction.y > size.y || box2._position.y + _direction.y < 0)))
+
+        // if box2 == null => leaving a border
+        //      box2 = box1
+        //      box1 normal computation
+        else if (box2 == null)
         {
             box2 = box1;
             box1 = wall.grid.boxes
             [box1._position.x + _direction.x]
             [box1._position.y + _direction.y];
         }
+
+        // if () => entering a border
+        //      box1 = null
+        //      box2 normal computation
+        else if ((_direction.x != 0) && (box1._position.x + _direction.x == size.x || box1._position.x + _direction.x == -1)
+              || (_direction.y != 0) && (box1._position.y + _direction.y == size.y || box1._position.y + _direction.y == -1))
+        {
+            box1 = null;
+            box2 = wall.grid.boxes
+                [box2._position.x + _direction.x]
+                [box2._position.y + _direction.y];
+        }
+
+        // if ((_direction.x != 0) && (box2.x + _direction.x == size.x || box2.x + _direction.x == 0)
+        //      || (_direction.y != 0) && (box2.y + _direction.y == size.y || box2.y + _direction.y == 0)) => entering a border
+        //      box2 = null
+        //      box1 normal computation
+        else if ((_direction.x != 0) && (box2._position.x + _direction.x == size.x || box2._position.x + _direction.x == -1)
+              || (_direction.y != 0) && (box2._position.y + _direction.y == size.y || box2._position.y + _direction.y == -1))
+        {
+            box2 = null;
+            box1 = wall.grid.boxes
+                [box1._position.x + _direction.x]
+                [box1._position.y + _direction.y];
+        }
         else
         {
-            Debug.Log("else ?");
             box1 = wall.grid.boxes
                 [box1._position.x + _direction.x]
                 [box1._position.y + _direction.y];
@@ -104,6 +130,37 @@ public class WallPart : MonoBehaviour
                 [box2._position.x + _direction.x]
                 [box2._position.y + _direction.y];
         }
+
+
+
+        //if ((box1 == null)
+        //    || (_direction.x != 0 && (box1._position.x + _direction.x > size.x || box1._position.x + _direction.x < 0))
+        //    || (_direction.y != 0 && (box1._position.y + _direction.y > size.y || box1._position.y + _direction.y < 0)))
+        //{
+        //    box1 = box2;
+        //    box2 = wall.grid.boxes
+        //    [box2._position.x + _direction.x]
+        //    [box2._position.y + _direction.y];
+        //}
+        //else if ((box2 == null)
+        //    || (_direction.x != 0 && (box2._position.x + _direction.x > size.x || box2._position.x + _direction.x < 0))
+        //    || (_direction.y != 0 && (box2._position.y + _direction.y > size.y || box2._position.y + _direction.y < 0)))
+        //{
+        //    box2 = box1;
+        //    box1 = wall.grid.boxes
+        //    [box1._position.x + _direction.x]
+        //    [box1._position.y + _direction.y];
+        //}
+        //else
+        //{
+        //    Debug.Log("else ?");
+        //    box1 = wall.grid.boxes
+        //        [box1._position.x + _direction.x]
+        //        [box1._position.y + _direction.y];
+        //    box2 = wall.grid.boxes
+        //        [box2._position.x + _direction.x]
+        //        [box2._position.y + _direction.y];
+        //}
 
         //box1 = wall.grid.boxes
         //    [box1._position.x + _direction.x]

@@ -16,7 +16,7 @@ public class Wall : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
-            OnPlayerMovement(new Vector2Int(0, 1));
+            OnPlayerMovement(new Vector2Int(0, -1));
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
