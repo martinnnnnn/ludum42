@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallPart : MonoBehaviour
 {
-    public Vector2Int direction;
+    //public Vector2Int direction;
     public Box box1;
     public Box box2;
     public Wall wall;
@@ -34,7 +34,7 @@ public class WallPart : MonoBehaviour
             Box box = (box1 == null) ? box2 : box1;
 
             // if moving horizontally
-            if (direction.x != 0)
+            if (wall.direction.x != 0)
             {
                 // if new position on the far left of the grid
                 if (transform.position.x > box.transform.position.x)
@@ -49,7 +49,7 @@ public class WallPart : MonoBehaviour
             }
 
             // if going vertically and 
-            else if (direction.y != 0)
+            else if (wall.direction.y != 0)
             {
                 // if new position on the bottom of the plane the grid
                 if (transform.position.y > box.transform.position.y)
