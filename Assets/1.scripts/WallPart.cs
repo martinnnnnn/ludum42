@@ -71,6 +71,48 @@ public class WallPart : MonoBehaviour
         return newPosition;
     }
 
+    public void UpdateBoxes(Vector2Int _direction)
+    {
+        Vector2Int size = wall.grid.roundSize;
+
+
+        if ((box1 == null)
+            || (_direction.x != 0 && (box1._position.x + _direction.x > size.x || box1._position.x + _direction.x < 0))
+            || (_direction.y != 0 && (box1._position.y + _direction.y > size.y || box1._position.y + _direction.y < 0)))
+        {            
+            box1 = box2;
+            box2 = wall.grid.boxes
+            [box2._position.x + _direction.x]
+            [box2._position.y + _direction.y];
+        }
+        else if ((box2 == null)
+            || (_direction.x != 0 && (box2._position.x + _direction.x > size.x || box2._position.x + _direction.x < 0))
+            || (_direction.y != 0 && (box2._position.y + _direction.y > size.y || box2._position.y + _direction.y < 0)))
+        {
+            box2 = box1;
+            box1 = wall.grid.boxes
+            [box1._position.x + _direction.x]
+            [box1._position.y + _direction.y];
+        }
+        else
+        {
+            Debug.Log("else ?");
+            box1 = wall.grid.boxes
+                [box1._position.x + _direction.x]
+                [box1._position.y + _direction.y];
+            box2 = wall.grid.boxes
+                [box2._position.x + _direction.x]
+                [box2._position.y + _direction.y];
+        }
+
+        //box1 = wall.grid.boxes
+        //    [box1._position.x + _direction.x]
+        //    [box1._position.y + _direction.y];
+        //box2 = wall.grid.boxes
+        //    [box2._position.x + _direction.x]
+        //    [box2._position.y + _direction.y];
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0, 0, 1, 1F);

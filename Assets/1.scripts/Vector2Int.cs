@@ -25,18 +25,15 @@ public struct Vector2Int
 
     public static bool operator ==(Vector2Int _vector1, Vector2Int _vector2)
     {
-        Debug.Log("custom ==");
         return _vector1.x == _vector2.x && _vector1.y == _vector2.y;
     }
     public static bool operator !=(Vector2Int _vector1, Vector2Int _vector2)
     {
-        Debug.Log("custom !=");
         return !(_vector1 == _vector2);
     }
 
     public override bool Equals(object obj)
     {
-        Debug.Log("classic equals");
         return base.Equals(obj);
     }
     public override int GetHashCode()
