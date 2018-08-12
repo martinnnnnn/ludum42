@@ -111,12 +111,12 @@ public class WallPart : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(0, 0, 1, 1F);
-        if (box1 != null)
-            Gizmos.DrawSphere(box1.transform.position, 0.5f);
-        if (box2 != null)
-            Gizmos.DrawSphere(box2.transform.position, 0.5f);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = new Color(0, 0, 1, 1F);
+    //    if (box1 != null)
+    //        Gizmos.DrawSphere(box1.transform.position, 0.5f);
+    //    if (box2 != null)
+    //        Gizmos.DrawSphere(box2.transform.position, 0.5f);
+    //}
 }

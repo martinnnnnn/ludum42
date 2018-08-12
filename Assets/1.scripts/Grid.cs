@@ -107,14 +107,12 @@ public class Grid : MonoBehaviour
             boxes[i] = new Box[roundSize.y];
             for (int j = 0; j < roundSize.y; ++j)
             {
-                GameObject obj = Instantiate(boxPrefab, this.transform) as GameObject;
-                Box currentBox = obj.GetComponent<Box>();
-                currentBox.size = wallPartPrefab.GetComponent<BoxCollider2D>().bounds.extents.x * 2 + wallPartPrefab.GetComponent<BoxCollider2D>().bounds.extents.y * 2;
+                Box currentBox = Instantiate(boxPrefab, this.transform).GetComponent<Box>();
+                Vector2 wallpartPrefabSize = wallPartPrefab.GetComponent<BoxCollider2D>().bounds.extents;
+                currentBox.size = wallpartPrefabSize.x * 2 + wallpartPrefabSize.y * 2;
                 currentBox._position.x = i;
                 currentBox._position.y = j;
-
-                //GameObject shameObject = Instantiate(, shame.transform);
-
+                
                 currentBox.transform.position = new Vector2(
                     currentBox._position.x * currentBox.size,
                     currentBox._position.y * currentBox.size);
