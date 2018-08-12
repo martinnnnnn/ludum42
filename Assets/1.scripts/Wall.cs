@@ -35,7 +35,7 @@ public class Wall : MonoBehaviour
             foreach (WallPart wallpart in wallparts)
             {
                 wallpart.UpdateBoxes(_direction);
-                wallpart.UpdateRealPositionSnap();
+                wallpart.UpdateRealPositionLerp();
             }
         }
     }

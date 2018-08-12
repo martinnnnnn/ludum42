@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class WallPart : MonoBehaviour
 {
@@ -17,13 +18,7 @@ public class WallPart : MonoBehaviour
 
     public void UpdateRealPositionLerp()
     {
-        StartCoroutine(LerpToPosition(GetNewPosition()));
-    }
-
-    IEnumerator LerpToPosition(Vector2 newPosition)
-    {
-        // TODO(martin) : do the lerp thing
-        yield return null;
+        transform.DOMove(GetNewPosition(), 0.5f);
     }
 
     public Vector2 GetNewPosition()
