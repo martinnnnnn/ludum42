@@ -66,7 +66,7 @@ public class Grid : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             InitGrid();
         }
@@ -108,8 +108,11 @@ public class Grid : MonoBehaviour
             for (int j = 0; j < roundSize.y; ++j)
             {
                 Box currentBox = Instantiate(boxPrefab, this.transform).GetComponent<Box>();
-                Vector2 wallpartPrefabSize = wallPartPrefab.GetComponent<BoxCollider2D>().bounds.extents;
-                currentBox.size = wallpartPrefabSize.x * 2 + wallpartPrefabSize.y * 2;
+                BoxCollider2D wallpartPrefabSize = wallPartPrefab.GetComponent<BoxCollider2D>();
+                currentBox.size = wallpartPrefabSize.bounds.extents.x * 2 + wallpartPrefabSize.bounds.extents.y * 2;
+                var collider = currentBox.gameObject.AddComponent<BoxCollider2D>();
+                collider.size = new Vector2(1 * currentBox.size, 1 * currentBox.size);
+                collider.isTrigger = true;
                 currentBox._position.x = i;
                 currentBox._position.y = j;
                 
@@ -118,7 +121,7 @@ public class Grid : MonoBehaviour
                     currentBox._position.y * currentBox.size);
             }
         }
-
+        Destroy(wallPartPrefab.GetComponent<BoxCollider2D>());
         foreach (Transform child in transform)
         {
             Box box = child.GetComponent<Box>();
@@ -153,10 +156,14 @@ public class Grid : MonoBehaviour
             {
                 currentWallPart.box1 = boxes[moveTo][i];
                 currentWallPart.box2 = boxes[moveTo - 1][i];
+                currentWallPart.box1.wallRight = currentWallPart;
+                currentWallPart.box2.wallLeft = currentWallPart;
+
             }
             else
             {
                 currentWallPart.box1 = boxes[0][i];
+                currentWallPart.box1.wallLeft = currentWallPart;
                 currentWallPart.box2 = null;
             }
             LeftWall.Add(currentWallPart);
@@ -172,12 +179,16 @@ public class Grid : MonoBehaviour
             {
                 currentWallPart.box2 = boxes[boxes.Length - moveTo][i];
                 currentWallPart.box1 = boxes[boxes.Length - moveTo - 1][i];
+                currentWallPart.box1.wallRight = currentWallPart;
+                currentWallPart.box2.wallLeft = currentWallPart;
             }
             else
             {
                 currentWallPart.box1 = boxes[boxes.Length - 1][i];
+                currentWallPart.box1.wallRight = currentWallPart;
                 currentWallPart.box2 = null;
             }
+
             RightWall.Add(currentWallPart);
             currentWallPart.UpdateRealPositionSnap();
         }
@@ -194,10 +205,14 @@ public class Grid : MonoBehaviour
             {
                 currentWallPart.box2 = boxes[i][boxes[i].Length - moveTo];
                 currentWallPart.box1 = boxes[i][boxes[i].Length - moveTo - 1];
+                currentWallPart.box1.wallTop = currentWallPart;
+                currentWallPart.box2.wallBottom = currentWallPart;
             }
             else
             {
                 currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
+                currentWallPart.box1.wallTop = currentWallPart;
+                currentWallPart.box2.wallLeft = currentWallPart;
                 currentWallPart.box2 = null;
             }
             TopWall.Add(currentWallPart);
@@ -212,10 +227,13 @@ public class Grid : MonoBehaviour
             {
                 currentWallPart.box1 = boxes[i][moveTo];
                 currentWallPart.box2 = boxes[i][moveTo - 1];
+                currentWallPart.box1.wallTop = currentWallPart;
+                currentWallPart.box2.wallBottom = currentWallPart;
             }
             else
             {
                 currentWallPart.box1 = boxes[i][0];
+                currentWallPart.box1.wallBottom = currentWallPart;
                 currentWallPart.box2 = null;
             }
 

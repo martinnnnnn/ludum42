@@ -9,7 +9,7 @@ public class WallPart : MonoBehaviour
     public Box box1;
     public Box box2;
     public Wall wall;
-
+    public bool isStatic = false;
 
     public void UpdateRealPositionSnap()
     {
