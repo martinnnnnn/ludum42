@@ -212,7 +212,6 @@ public class Grid : MonoBehaviour
             {
                 currentWallPart.box1 = boxes[i][boxes[i].Length - 1];
                 currentWallPart.box1.wallTop = currentWallPart;
-                currentWallPart.box2.wallLeft = currentWallPart;
                 currentWallPart.box2 = null;
             }
             TopWall.Add(currentWallPart);
