@@ -13,6 +13,7 @@ public class Hero : MonoBehaviour
     float heightDiff = 0;
     float horizontalDistance;
     float horizontalDistanceBonus;
+    Sequence mySequence;
 
     private void Start()
     {
@@ -22,24 +23,22 @@ public class Hero : MonoBehaviour
         horizontalDistance = StaticWallBig.GetComponent<BoxCollider2D>().bounds.extents.x * 2.0f / 3.0f;
         horizontalDistanceBonus = StaticWallSmall.GetComponent<BoxCollider2D>().bounds.extents.x;
         heightDiff = (horizontalDistance * Mathf.Sqrt(2.0f) / 2.0f) - horizontalDistance / 2.0f;
-
-        // height difference between when it's on an edge and when it's on a side
-        //side = collider.GetComponent<BoxCollider2D>().bounds.extents.x;
-        //heightDiff = (side * Mathf.Sqrt(2.0f)) - side / 2.0f;
+        mySequence = DOTween.Sequence();
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             Vector2 newPositionMidWay = new Vector2(transform.position.x + horizontalDistance / 2, transform.position.y + heightDiff);
             Vector2 newPosition = new Vector2(transform.position.x + horizontalDistance, transform.position.y);
-            float newRotation = transform.rotation.eulerAngles.z - 180;
-
-            Sequence mySequence = DOTween.Sequence();
-            mySequence.Append(transform.DOMove(newPositionMidWay, 0.5f))
-                .Append(transform.DOMove(newPosition, 0.5f))
-                .Insert(0, transform.DORotate(new Vector3(0, 0, newRotation), 1.0f));
+            float newRotation = transform.rotation.eulerAngles.z - 90;
+            if (!mySequence.IsActive())
+            {
+                mySequence = DOTween.Sequence();
+                mySequence.Append(transform.DOMove(newPositionMidWay, 0.2f))
+                    .Append(transform.DOMove(newPosition, 0.2f))
+                    .Insert(0, transform.DORotate(new Vector3(0, 0, newRotation), 0.45f));
+            }
         }
     }
 }
