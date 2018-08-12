@@ -131,7 +131,7 @@ public class Grid : MonoBehaviour
         }
 
         wallPartPrefab.transform.position = boxes[roundSize.x / 2][roundSize.y / 2].transform.position;
-
+        //Debug.Log(wallPartPrefab.transform.position);
 
         InitWall(ref LeftWall, new Vector2Int(1, 0));
         InitWall(ref RightWall, new Vector2Int(-1, 0));
@@ -147,13 +147,14 @@ public class Grid : MonoBehaviour
         {
             // adding wall parts to leftwall
             WallPart currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.transform.position = wallPartPrefab.transform.position;
             currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
             currentWallPart.transform.Rotate(new Vector3(0, 0, 270));
             int moveTo = FindInEditorParameters(EditorLeftWallList, i);
             if (moveTo != -1)
             {
                 currentWallPart.box1 = boxes[moveTo][i];
-                currentWallPart.box2 = boxes[moveTo-1][i];
+                currentWallPart.box2 = boxes[moveTo - 1][i];
             }
             else
             {
@@ -165,6 +166,7 @@ public class Grid : MonoBehaviour
 
             // adding wall parts to rightwall
             currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.transform.position = wallPartPrefab.transform.position;
             currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
             currentWallPart.transform.Rotate(new Vector3(0, 0, 90));
             moveTo = FindInEditorParameters(EditorRightWallList, i);
@@ -184,8 +186,9 @@ public class Grid : MonoBehaviour
 
         for (int i = 0; i < roundSize.x; ++i)
         {
-            // adding wall parts to bottomwall
+            // adding wall parts to topwall
             WallPart currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.transform.position = wallPartPrefab.transform.position;
             currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
             currentWallPart.transform.Rotate(new Vector3(0, 0, 180));
             int moveTo = FindInEditorParameters(EditorTopWallList, i);
@@ -204,8 +207,9 @@ public class Grid : MonoBehaviour
 
             // adding wall parts to bottomwall
             currentWallPart = Instantiate(wallPartPrefab, this.transform).GetComponent<WallPart>();
+            currentWallPart.transform.position = wallPartPrefab.transform.position;
             currentWallPart.GetComponent<SpriteRenderer>().enabled = true;
-                        moveTo = FindInEditorParameters(EditorBottomWallList, i);
+            moveTo = FindInEditorParameters(EditorBottomWallList, i);
             if (moveTo != -1)
             {
                 currentWallPart.box1 = boxes[i][moveTo];

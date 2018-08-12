@@ -43,15 +43,15 @@ public class WallPart : MonoBehaviour
                 }
             }
 
-            // if going vertically and 
+            // if going vertically
             else if (wall.direction.y != 0)
             {
-                // if new position on the bottom of the plane the grid
+                // if new position on the topbottom of the plane the grid
                 if (transform.position.y > box.transform.position.y)
                 {
                     newPosition = new Vector2(box.transform.position.x, box.transform.position.y - box.size / 2);
                 }
-                // if new position on the top of the plane the grid
+                // if new position on the bottom of the plane the grid
                 else
                 {
                     newPosition = new Vector2(box.transform.position.x, box.transform.position.y + box.size / 2);

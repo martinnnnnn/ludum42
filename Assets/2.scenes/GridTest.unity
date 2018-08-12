@@ -152,6 +152,7 @@ MonoBehaviour:
   RightWall: {fileID: 0}
   TopWall: {fileID: 0}
   BottomWall: {fileID: 0}
+  level: 0
 --- !u!4 &239525010
 Transform:
   m_ObjectHideFlags: 0
@@ -237,7 +238,7 @@ Prefab:
     - target: {fileID: 212709908743386140, guid: 8f17483d6deb5c84dad9a772321a7cf3,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1222932958031746, guid: 8f17483d6deb5c84dad9a772321a7cf3, type: 2}
       propertyPath: m_Name
