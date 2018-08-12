@@ -29,15 +29,43 @@ public class Grid : MonoBehaviour
     [HideInInspector] public Wall TopWall;
     [HideInInspector] public Wall BottomWall;
 
+    public bool level;
 
     private void Start()
     {
-        InitGrid();
+        roundSize = new Vector2Int(size);
+
+        if (level)
+        {
+            LeftWall.direction = new Vector2Int(1, 0);
+            RightWall.direction = new Vector2Int(-1, 0);
+            TopWall.direction = new Vector2Int(0, -1);
+            BottomWall.direction = new Vector2Int(0, 1);
+
+            List<Box> littleBoxes = new List<Box>(GetComponentsInChildren<Box>());
+            var byx = littleBoxes.GroupBy(box => box.transform.position.x);
+
+            boxes = new Box[roundSize.x][];
+            int i = 0;
+            foreach (var group in byx)
+            {
+                boxes[i] = new Box[roundSize.y];
+                int j = 0;
+                foreach (var groupedItem in group)
+                {
+                    boxes[i][j] = groupedItem;
+                    boxes[i][j]._position.x = i;
+                    boxes[i][j]._position.y = j;
+                    j++;
+                }
+                i++;
+            }
+        }
+
     }
 
     private void Update()
     {
-
         if (Input.GetKey(KeyCode.A))
         {
             InitGrid();
@@ -71,20 +99,22 @@ public class Grid : MonoBehaviour
             Destroy(wall);
         }
 
-
         roundSize = new Vector2Int(size);
         boxes = new Box[roundSize.x][];
 
         for (int i = 0; i < roundSize.x; ++i)
         {
+            boxes[i] = new Box[roundSize.y];
             for (int j = 0; j < roundSize.y; ++j)
             {
-                boxes[i] = new Box[roundSize.y];
                 GameObject obj = Instantiate(boxPrefab, this.transform) as GameObject;
                 Box currentBox = obj.GetComponent<Box>();
                 currentBox.size = wallPartPrefab.GetComponent<BoxCollider2D>().bounds.extents.x * 2 + wallPartPrefab.GetComponent<BoxCollider2D>().bounds.extents.y * 2;
                 currentBox._position.x = i;
                 currentBox._position.y = j;
+
+                //GameObject shameObject = Instantiate(, shame.transform);
+
                 currentBox.transform.position = new Vector2(
                     currentBox._position.x * currentBox.size,
                     currentBox._position.y * currentBox.size);

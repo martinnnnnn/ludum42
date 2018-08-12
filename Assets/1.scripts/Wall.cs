@@ -30,6 +30,7 @@ public class Wall : MonoBehaviour
 
     public void OnPlayerMovement(Vector2Int _direction)
     {
+        Debug.Log("onplayermovement : (" + _direction.x + "," + _direction.y + ") / (" + direction.x + "," + direction.y + ")");
         if (_direction == direction)
         {
             foreach (WallPart wallpart in wallparts)
