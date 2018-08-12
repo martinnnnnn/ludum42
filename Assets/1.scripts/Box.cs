@@ -22,7 +22,7 @@ public class Box : MonoBehaviour
     {
         Gizmos.color = new Color(1, 0, 0, 1F);
         Gizmos.DrawWireCube(transform.position, new Vector2(size, size));
-        Gizmos.color = new Color(0, 1, 0, 0.5F);
-        Gizmos.DrawCube(transform.position, new Vector2(size, size));
+        //Gizmos.color = new Color(0, 1, 0, 0.5F);
+        //Gizmos.DrawCube(transform.position, new Vector2(size, size));
     }
 }
